@@ -25,7 +25,7 @@ export function Layout({ children, title, showBack, showNav = true }: LayoutProp
           )}
         </div>
         {/* Center: title */}
-        <h1 className="absolute left-1/2 -translate-x-1/2 text-lg font-bold whitespace-nowrap">{title}</h1>
+        <h1 className="flex-1 text-center text-lg font-bold whitespace-nowrap">{title}</h1>
         {/* Right: nav icons or spacer */}
         <div className="min-w-[40px] flex justify-end">
           {showNav && (
