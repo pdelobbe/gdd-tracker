@@ -6,6 +6,7 @@ export type ScreenName =
   | 'settings'
   | 'productList'
   | 'productDetail'
+  | 'historicalGDD'
 
 export type TempUnit = 'F' | 'C'
 
@@ -18,6 +19,10 @@ export type GrassType =
   | 'fine_fescue'
   | 'creeping_bentgrass'
   | 'bermudagrass'
+  | 'bermuda_tifway419'
+  | 'bermuda_tiftuf'
+  | 'bermuda_celebration'
+  | 'bermuda_tahoma31'
   | 'zoysiagrass'
   | 'st_augustinegrass'
   | 'buffalograss'
@@ -31,6 +36,7 @@ export interface GrassInfo {
   id: GrassType
   name: string
   season: SeasonType
+  parentId?: GrassType
 }
 
 export const GRASS_OPTIONS: GrassInfo[] = [
@@ -39,12 +45,28 @@ export const GRASS_OPTIONS: GrassInfo[] = [
   { id: 'tall_fescue', name: 'Tall Fescue', season: 'cool' },
   { id: 'fine_fescue', name: 'Fine Fescue', season: 'cool' },
   { id: 'creeping_bentgrass', name: 'Creeping Bentgrass', season: 'cool' },
-  { id: 'bermudagrass', name: 'Bermudagrass', season: 'warm' },
+  { id: 'bermudagrass', name: 'Common Bermuda', season: 'warm' },
+  { id: 'bermuda_tifway419', name: 'Tifway 419', season: 'warm', parentId: 'bermudagrass' },
+  { id: 'bermuda_tiftuf', name: 'TifTuf', season: 'warm', parentId: 'bermudagrass' },
+  { id: 'bermuda_celebration', name: 'Celebration', season: 'warm', parentId: 'bermudagrass' },
+  { id: 'bermuda_tahoma31', name: 'Tahoma 31', season: 'warm', parentId: 'bermudagrass' },
   { id: 'zoysiagrass', name: 'Zoysiagrass', season: 'warm' },
   { id: 'st_augustinegrass', name: 'St. Augustinegrass', season: 'warm' },
   { id: 'buffalograss', name: 'Buffalograss', season: 'warm' },
   { id: 'centipedegrass', name: 'Centipedegrass', season: 'warm' },
 ]
+
+export const BERMUDA_CULTIVAR_IDS: GrassType[] = [
+  'bermudagrass',
+  'bermuda_tifway419',
+  'bermuda_tiftuf',
+  'bermuda_celebration',
+  'bermuda_tahoma31',
+]
+
+export function isBermudaCultivar(grassType: GrassType): boolean {
+  return BERMUDA_CULTIVAR_IDS.includes(grassType)
+}
 
 export interface GrassProfile {
   grassType: GrassType

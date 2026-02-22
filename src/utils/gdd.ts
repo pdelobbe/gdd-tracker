@@ -1,5 +1,28 @@
 import type { SeasonType, ProgressZone } from '../types'
 
+export interface GDDTimeseriesPoint {
+  date: string
+  dailyGDD: number
+  cumulativeGDD: number
+}
+
+/**
+ * Compute a GDD timeseries from weather data.
+ * Returns daily and cumulative GDD for each day.
+ */
+export function computeGDDTimeseries(
+  weatherData: { date: string; tMaxC: number; tMinC: number }[],
+  baseTempC: number
+): GDDTimeseriesPoint[] {
+  let cumulative = 0
+  return weatherData.map((w) => {
+    const avg = (w.tMaxC + w.tMinC) / 2
+    const daily = Math.max(0, avg - baseTempC)
+    cumulative += daily
+    return { date: w.date, dailyGDD: Math.round(daily * 10) / 10, cumulativeGDD: Math.round(cumulative * 10) / 10 }
+  })
+}
+
 /**
  * Calculate daily GDD from max/min temps (in Celsius).
  * Cool-season base: 0°C, Warm-season base: 10°C

@@ -9,6 +9,7 @@ import { LogAppShell } from './screens/logapp/LogAppShell'
 import { SettingsScreen } from './screens/SettingsScreen'
 import { ProductListScreen } from './screens/ProductListScreen'
 import { ProductDetailScreen } from './screens/ProductDetailScreen'
+import { HistoricalGDDScreen } from './screens/HistoricalGDDScreen'
 
 function App() {
   const screen = useNavigationStore((s) => s.screen)
@@ -37,6 +38,8 @@ function App() {
       return <ProductListScreen />
     case 'productDetail':
       return <ProductDetailScreen />
+    case 'historicalGDD':
+      return <HistoricalGDDScreen />
     default:
       return <SplashScreen />
   }

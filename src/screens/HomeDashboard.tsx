@@ -15,6 +15,25 @@ export function HomeDashboard() {
       <div className="p-4 space-y-4">
         <WeatherBadge />
 
+        {/* Seasonal GDD navigation */}
+        <button
+          onClick={() => navigate('historicalGDD')}
+          className="w-full flex items-center gap-3 bg-white/80 rounded-xl p-3 border border-gray-200 active:bg-gray-50 transition-colors"
+        >
+          <div className="w-9 h-9 bg-green-100 rounded-lg flex items-center justify-center shrink-0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2f6e2e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <div className="flex-1 min-w-0 text-left">
+            <p className="text-sm font-medium text-gray-800">Seasonal GDD</p>
+            <p className="text-xs text-gray-500">View cumulative growing degree days</p>
+          </div>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+
         {activeApps.length === 0 ? (
           <EmptyState
             message="No active applications"
