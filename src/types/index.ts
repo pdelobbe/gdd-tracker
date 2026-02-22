@@ -132,3 +132,18 @@ export interface UserSettings {
   key: string
   value: string
 }
+
+export type NotificationLevel = 'pre_limit' | 'threshold_reached'
+
+export interface NotificationLogEntry {
+  id: string
+  applicationId: string
+  level: NotificationLevel
+  firedAt: string
+}
+
+export interface DailyReminderLog {
+  id: string
+  applicationId: string
+  lastRemindedDate: string
+}

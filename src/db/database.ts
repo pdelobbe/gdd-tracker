@@ -1,5 +1,5 @@
 import Dexie, { type Table } from 'dexie'
-import type { Product, Application, Location, DailyGDDRecord, WeatherCache, UserSettings } from '../types'
+import type { Product, Application, Location, DailyGDDRecord, WeatherCache, UserSettings, NotificationLogEntry, DailyReminderLog } from '../types'
 
 class GDDTrackerDB extends Dexie {
   locations!: Table<Location>
@@ -8,6 +8,8 @@ class GDDTrackerDB extends Dexie {
   dailyGDDRecords!: Table<DailyGDDRecord>
   weatherCache!: Table<WeatherCache>
   userSettings!: Table<UserSettings>
+  notificationLog!: Table<NotificationLogEntry>
+  dailyReminderLog!: Table<DailyReminderLog>
 
   constructor() {
     super('GDDTrackerDB')
@@ -31,6 +33,18 @@ class GDDTrackerDB extends Dexie {
       userSettings: 'id, key',
     }).upgrade(async (tx) => {
       await tx.table('products').clear()
+    })
+
+    // Version 3: notification tracking tables
+    this.version(3).stores({
+      locations: 'id, name',
+      products: 'id, name',
+      applications: 'id, productId, locationId, isActive, appliedDate',
+      dailyGDDRecords: 'id, applicationId, date',
+      weatherCache: 'id, [lat+lng+date], date',
+      userSettings: 'id, key',
+      notificationLog: 'id, applicationId, level, [applicationId+level]',
+      dailyReminderLog: 'id, applicationId',
     })
   }
 }

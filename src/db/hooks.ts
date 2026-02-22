@@ -1,6 +1,6 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from './database'
-import type { Product, Application, Location, DailyGDDRecord, WeatherCache } from '../types'
+import type { Product, Application, Location, DailyGDDRecord, WeatherCache, NotificationLevel } from '../types'
 import { generateId } from '../utils/uuid'
 
 // ── Location hooks ──
@@ -69,8 +69,10 @@ export async function updateApplication(id: string, updates: Partial<Application
 }
 
 export async function deleteApplication(id: string) {
-  await db.transaction('rw', db.applications, db.dailyGDDRecords, async () => {
+  await db.transaction('rw', db.applications, db.dailyGDDRecords, db.notificationLog, db.dailyReminderLog, async () => {
     await db.dailyGDDRecords.where('applicationId').equals(id).delete()
+    await db.notificationLog.where('applicationId').equals(id).delete()
+    await db.dailyReminderLog.where('applicationId').equals(id).delete()
     await db.applications.delete(id)
   })
 }
@@ -144,4 +146,44 @@ export async function isSeeded(): Promise<boolean> {
 
 export async function seedProducts(products: Product[]) {
   await db.products.bulkAdd(products)
+}
+
+// ── Notification Log ──
+
+export async function hasNotificationFired(applicationId: string, level: NotificationLevel): Promise<boolean> {
+  const entry = await db.notificationLog
+    .where('[applicationId+level]')
+    .equals([applicationId, level])
+    .first()
+  return !!entry
+}
+
+export async function recordNotification(applicationId: string, level: NotificationLevel): Promise<void> {
+  await db.notificationLog.add({
+    id: generateId(),
+    applicationId,
+    level,
+    firedAt: new Date().toISOString(),
+  })
+}
+
+export async function clearNotificationsForApplication(applicationId: string): Promise<void> {
+  await db.transaction('rw', db.notificationLog, db.dailyReminderLog, async () => {
+    await db.notificationLog.where('applicationId').equals(applicationId).delete()
+    await db.dailyReminderLog.where('applicationId').equals(applicationId).delete()
+  })
+}
+
+export async function getLastReminderDate(applicationId: string): Promise<string | undefined> {
+  const entry = await db.dailyReminderLog.where('applicationId').equals(applicationId).first()
+  return entry?.lastRemindedDate
+}
+
+export async function updateLastReminderDate(applicationId: string, date: string): Promise<void> {
+  const existing = await db.dailyReminderLog.where('applicationId').equals(applicationId).first()
+  if (existing) {
+    await db.dailyReminderLog.update(existing.id, { lastRemindedDate: date })
+  } else {
+    await db.dailyReminderLog.add({ id: generateId(), applicationId, lastRemindedDate: date })
+  }
 }

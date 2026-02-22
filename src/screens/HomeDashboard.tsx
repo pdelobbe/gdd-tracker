@@ -4,11 +4,13 @@ import { ApplicationCard } from '../components/ApplicationCard'
 import { EmptyState } from '../components/EmptyState'
 import { useApplications } from '../db/hooks'
 import { useNavigationStore } from '../stores/useNavigationStore'
+import { useNotificationChecker } from '../hooks/useNotificationChecker'
 
 export function HomeDashboard() {
   const applications = useApplications()
   const navigate = useNavigationStore((s) => s.navigate)
   const activeApps = applications.filter((a) => a.isActive)
+  useNotificationChecker(activeApps)
 
   return (
     <Layout title="GDD Tracker" showBack={false}>
