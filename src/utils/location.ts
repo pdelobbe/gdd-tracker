@@ -51,7 +51,7 @@ export async function reverseGeocode(
   // Since Open-Meteo doesn't have reverse geocoding, use NWS points API
   try {
     const res = await fetch(`https://api.weather.gov/points/${lat},${lng}`, {
-      headers: { 'User-Agent': 'GDDTracker/1.0 (gddtracker@roserockenvironmental.com)' },
+      headers: { 'User-Agent': 'GDDTracker/1.0 (contact@lawnlab.app)' },
     })
     if (!res.ok) throw new Error('NWS error')
     const data = await res.json()

@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
-  appId: 'com.roserockenvironmental.gddtracker',
+  appId: 'com.lawnlab.gddtracker',
   appName: 'GDD Tracker',
   webDir: 'dist',
   plugins: {

@@ -19,9 +19,8 @@ export function SettingsScreen() {
 
   async function handleToggle(setter: (on: boolean) => void, newValue: boolean) {
     if (newValue && permissionState !== 'granted') {
-      const granted = await requestNotificationPermission()
+      await requestNotificationPermission()
       setPermissionState(getNotificationPermission())
-      if (!granted) return
     }
     setter(newValue)
   }
@@ -179,7 +178,7 @@ export function SettingsScreen() {
         <div className="text-center text-sm text-gray-400 space-y-1">
           <p>GDD Tracker v1.0.0</p>
           <p>Growing Degree Day PGR Reapplication Timer</p>
-          <p className="text-xs">Rose Rock Environmental Services</p>
+          <p className="text-xs">Lawn Lab</p>
         </div>
       </div>
     </Layout>

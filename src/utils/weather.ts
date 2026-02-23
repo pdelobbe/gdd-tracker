@@ -51,7 +51,7 @@ export async function fetchForecastWeather(
 async function fetchNWSForecast(lat: number, lng: number, days: number): Promise<DailyWeather[]> {
   // Get NWS gridpoint
   const pointRes = await fetch(`https://api.weather.gov/points/${lat},${lng}`, {
-    headers: { 'User-Agent': 'GDDTracker/1.0 (gddtracker@roserockenvironmental.com)' },
+    headers: { 'User-Agent': 'GDDTracker/1.0 (contact@lawnlab.app)' },
   })
   if (!pointRes.ok) throw new Error('NWS points error')
   const pointData = await pointRes.json()
@@ -60,7 +60,7 @@ async function fetchNWSForecast(lat: number, lng: number, days: number): Promise
   if (!forecastUrl) throw new Error('No forecast URL')
 
   const forecastRes = await fetch(forecastUrl, {
-    headers: { 'User-Agent': 'GDDTracker/1.0 (gddtracker@roserockenvironmental.com)' },
+    headers: { 'User-Agent': 'GDDTracker/1.0 (contact@lawnlab.app)' },
   })
   if (!forecastRes.ok) throw new Error('NWS forecast error')
   const forecastData = await forecastRes.json()
