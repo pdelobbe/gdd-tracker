@@ -44,11 +44,13 @@ export function LogAppShell() {
   }
 
   return (
-    <Layout title="Log Application" showBack={false} showNav={false}>
+    <Layout title="Log Application" showBack={false} showBottomNav={false}>
       <ProgressBar currentStep={step} totalSteps={TOTAL_STEPS} />
-      <StepContent step={step} />
+      <div className="flex-1 overflow-hidden flex flex-col min-h-0">
+        <StepContent step={step} />
+      </div>
       {step < 4 && (
-        <div className="flex gap-3 p-4 pb-6">
+        <div className="shrink-0 flex gap-3 p-4 py-3 safe-bottom">
           <button
             onClick={handleBack}
             className="flex-1 py-3 rounded-xl bg-white/70 text-gray-700 font-semibold active:bg-white border border-gray-200"

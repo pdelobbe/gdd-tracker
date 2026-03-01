@@ -47,7 +47,7 @@ export function StepConfirm() {
   }
 
   return (
-    <div className="flex flex-col gap-5 p-4">
+    <div className="flex-1 flex flex-col min-h-0 p-4 gap-5 overflow-y-auto">
       <div className="text-center">
         <h2 className="text-xl font-bold text-gray-900">Confirm Application</h2>
         <p className="text-sm text-gray-500 mt-1">
@@ -65,7 +65,7 @@ export function StepConfirm() {
         {store.notes && <SummaryRow label="Notes" value={store.notes} />}
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex gap-3 safe-bottom">
         <button
           onClick={() => store.prevStep()}
           className="flex-1 py-3 rounded-xl bg-white/70 text-gray-700 font-semibold active:bg-white border border-gray-200"

@@ -52,15 +52,15 @@ export function HistoricalGDDScreen() {
 
   if (!location) {
     return (
-      <Layout title="Seasonal GDD" showBack showNav={false}>
+      <Layout title="Seasonal GDD" showBack>
         <div className="p-8 text-center text-gray-400">Set up a location first</div>
       </Layout>
     )
   }
 
   return (
-    <Layout title="Seasonal GDD" showBack showNav={false}>
-      <div className="p-4 space-y-4">
+    <Layout title="Seasonal GDD" showBack>
+      <div className="flex-1 overflow-y-auto min-h-0 p-4 space-y-4">
         {/* Season toggle */}
         <div className="flex items-center gap-2 bg-white/80 rounded-xl p-1 border border-gray-200">
           <ToggleButton

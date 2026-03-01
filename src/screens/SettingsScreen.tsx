@@ -26,8 +26,8 @@ export function SettingsScreen() {
   }
 
   return (
-    <Layout title="Settings" showBack showNav={false}>
-      <div className="p-4 space-y-6">
+    <Layout title="Settings" showBack>
+      <div className="flex-1 overflow-y-auto min-h-0 p-4 space-y-6">
         <div className="bg-white/80 rounded-2xl border border-gray-200 divide-y divide-gray-200">
           <div className="flex items-center justify-between p-4">
             <div>

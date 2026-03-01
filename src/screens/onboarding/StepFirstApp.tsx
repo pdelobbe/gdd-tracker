@@ -1,6 +1,6 @@
 export function StepFirstApp() {
   return (
-    <div className="flex flex-col items-center justify-center gap-6 p-4 py-8">
+    <div className="flex-1 flex flex-col items-center justify-center gap-6 p-3 min-h-0">
       <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center shadow-lg shadow-green-300/40">
         <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#2f6e2e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />

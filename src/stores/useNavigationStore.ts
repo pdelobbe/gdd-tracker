@@ -6,6 +6,7 @@ interface NavigationState {
   backStack: ScreenName[]
   productIdForDetail: string | null
   navigate: (to: ScreenName, opts?: { productId?: string }) => void
+  navigateTab: (to: ScreenName) => void
   goBack: () => void
 }
 
@@ -19,6 +20,7 @@ export const useNavigationStore = create<NavigationState>()((set, get) => ({
       backStack: [...s.backStack, s.screen],
       productIdForDetail: opts?.productId ?? s.productIdForDetail,
     })),
+  navigateTab: (to) => set({ screen: to, backStack: [] }),
   goBack: () => {
     const { backStack } = get()
     if (backStack.length === 0) return

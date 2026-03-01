@@ -36,7 +36,6 @@ export function OnboardingShell() {
 
   const handleNext = async () => {
     if (step === 1 && lat !== null && lng !== null) {
-      // Save location to DB
       await addLocation({
         name: locationName,
         lat,
@@ -62,10 +61,12 @@ export function OnboardingShell() {
   }
 
   return (
-    <Layout title="Welcome" showBack={false} showNav={false}>
+    <Layout title="Welcome" showBack={false} showBottomNav={false}>
       <ProgressBar currentStep={step} totalSteps={TOTAL_STEPS} />
-      <StepContent step={step} />
-      <div className="flex gap-3 p-4 pb-6">
+      <div className="flex-1 overflow-hidden flex flex-col min-h-0">
+        <StepContent step={step} />
+      </div>
+      <div className="shrink-0 flex gap-3 p-4 py-3 safe-bottom">
         {step > 1 && (
           <button
             onClick={prevStep}
@@ -83,7 +84,7 @@ export function OnboardingShell() {
         </button>
       </div>
       {step === TOTAL_STEPS && (
-        <div className="px-4 pb-4 -mt-2">
+        <div className="shrink-0 px-4 pb-4 -mt-2 safe-bottom">
           <button
             onClick={handleSkip}
             className="w-full py-2 text-sm text-gray-400 active:text-gray-600"

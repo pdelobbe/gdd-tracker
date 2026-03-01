@@ -9,7 +9,7 @@ export function ProductListScreen() {
 
   return (
     <Layout title="PGR Products" showBack>
-      <div className="divide-y divide-gray-100">
+      <div className="flex-1 overflow-y-auto min-h-0 divide-y divide-gray-100">
         {products.map((product) => (
           <ProductCard
             key={product.id}

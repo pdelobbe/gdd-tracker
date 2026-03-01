@@ -6,15 +6,15 @@ export function StepProduct() {
   const { selectedProductId, setSelectedProductId } = useApplicationStore()
 
   return (
-    <div className="flex flex-col gap-4 p-4">
-      <div className="text-center">
+    <div className="flex-1 flex flex-col min-h-0 p-4 gap-4">
+      <div className="text-center shrink-0">
         <h2 className="text-xl font-bold text-gray-900">Select PGR Product</h2>
         <p className="text-sm text-gray-500 mt-1">
           Which product did you apply?
         </p>
       </div>
 
-      <div className="space-y-2">
+      <div className="flex-1 overflow-y-auto min-h-0 space-y-2">
         {products.map((product) => (
           <button
             key={product.id}

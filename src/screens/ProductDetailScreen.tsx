@@ -10,7 +10,7 @@ export function ProductDetailScreen() {
 
   if (!product) {
     return (
-      <Layout title="Product" showBack showNav={false}>
+      <Layout title="Product" showBack>
         <div className="p-8 text-center text-gray-400">Product not found</div>
       </Layout>
     )
@@ -39,8 +39,8 @@ export function ProductDetailScreen() {
   }
 
   return (
-    <Layout title={product.name} showBack showNav={false}>
-      <div className="p-4 space-y-5">
+    <Layout title={product.name} showBack>
+      <div className="flex-1 overflow-y-auto min-h-0 p-4 space-y-5">
         {/* Product info */}
         <div className="bg-white/80 rounded-2xl border border-gray-200 p-4 space-y-2">
           <div>

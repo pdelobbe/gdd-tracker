@@ -41,7 +41,7 @@ export function StepLocation() {
   }
 
   return (
-    <div className="flex flex-col gap-6 p-4">
+    <div className="flex-1 flex flex-col gap-3 p-3 min-h-0 overflow-y-auto">
       <div className="text-center">
         <h2 className="text-xl font-bold text-gray-900">Set Your Location</h2>
         <p className="text-sm text-gray-500 mt-1">

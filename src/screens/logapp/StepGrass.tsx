@@ -107,7 +107,7 @@ export function StepGrass() {
   const isBermudaSelected = grassType !== null && isBermudaCultivar(grassType)
 
   return (
-    <div className="flex flex-col gap-5 p-4">
+    <div className="flex-1 flex flex-col min-h-0 p-4 gap-5 overflow-y-auto">
       <div className="text-center">
         <h2 className="text-xl font-bold text-gray-900">Grass Type & Height</h2>
         <p className="text-sm text-gray-500 mt-1">
